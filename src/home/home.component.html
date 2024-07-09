@@ -1,0 +1,34 @@
+<div style=" margin: 10px;">
+  <h2 class="title">{{ title }}</h2>
+
+  @if (isLoader)
+  {
+    <em>Loading...</em>
+  }
+
+  <div>
+    <mat-form-field>
+      <input matInput placeholder="Search" (blur)="onSearch($event)">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+ 
+  @if (hackerNewsStories.length > 0 )
+  {
+    <div class="scrollable-div">
+      @for (story of hackerNewsStories; track story) {
+      <mat-card appearance="outlined" (click)="open(story.url)">
+        <mat-card-content>
+          <mat-card-title>{{ story.title }}</mat-card-title>
+          <mat-card-subtitle>by {{ story.by }}</mat-card-subtitle>
+        </mat-card-content>
+      </mat-card>
+      }
+    </div>
+  }
+  
+  @if (!isLoader && hackerNewsStories.length == 0)
+  {
+    <em>No result found !</em>
+  }
+</div>
